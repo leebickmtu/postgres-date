@@ -1,5 +1,7 @@
 'use strict'
 
+const {DateTime} = require('luxon');
+
 var DATE_TIME = /(\d{1,})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})(\.\d{1,})?/
 var DATE = /^(\d{1,})-(\d{2})-(\d{2})$/
 var TIME_ZONE = /([Z+-])(\d{2})?:?(\d{2})?:?(\d{2})?/
@@ -47,7 +49,7 @@ module.exports = function parseDate (isoDate) {
     date.setUTCFullYear(year)
   }
 
-  return date
+  return DateTime.fromJSDate(date)
 }
 
 function getDate (isoDate) {
@@ -58,7 +60,7 @@ function getDate (isoDate) {
   // YYYY-MM-DD will be parsed as local time
   var date = new Date(year, month, day)
   date.setFullYear(year)
-  return date
+  return DateTime.fromJSDate(date)
 }
 
 // match timezones:
